@@ -1,0 +1,1239 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="LgxTpre">
+      
+      
+        <link rel="canonical" href="https://lgxtpre.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/WBLT/">
+      
+      <link rel="icon" href="../..">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>$\text{Weight Balanced Leafy Tree}$ 学习笔记： - NaDGenLib Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../site_config/static/css/extra.css?v=14">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#textweight-balanced-leafy-tree" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="NaDGenLib Docs" class="md-header__button md-logo" aria-label="NaDGenLib Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NaDGenLib Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              $\text{Weight Balanced Leafy Tree}$ 学习笔记：
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="red"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white"  aria-label="切换至白天模式"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="切换至白天模式" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/LgxTpre/lgxtpre.github.com" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LgxTpre's Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        数据结构
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NaDGenLib Docs" class="md-nav__button md-logo" aria-label="NaDGenLib Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    NaDGenLib Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/LgxTpre/lgxtpre.github.com" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LgxTpre's Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          数据结构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="数据结构" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          数据结构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          $\text{Weight Balanced Leafy Tree}$ 学习笔记：
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        $\text{Weight Balanced Leafy Tree}$ 学习笔记：
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前言：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    前置知识：
+  </a>
+  
+    <nav class="md-nav" aria-label="前置知识：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#textleafy-tree" class="md-nav__link">
+    一、\(\text{Leafy Tree}\)：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textleafy-tree-textbst" class="md-nav__link">
+    二、基于 \(\text{Leafy Tree}\) 的 \(\text{BST}\) 实现：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textweight-balanced-leafy-tree_1" class="md-nav__link">
+    三、\(\text{Weight Balanced Leafy Tree}\)：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textweight-balanced-leafy-tree_2" class="md-nav__link">
+    四、\(\text{Weight Balanced Leafy Tree}\) 的区间操作：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textweight-balanced-leafy-tree_3" class="md-nav__link">
+    五、\(\text{Weight Balanced Leafy Tree}\) 实现可并堆：
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前言：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    前置知识：
+  </a>
+  
+    <nav class="md-nav" aria-label="前置知识：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#textleafy-tree" class="md-nav__link">
+    一、\(\text{Leafy Tree}\)：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textleafy-tree-textbst" class="md-nav__link">
+    二、基于 \(\text{Leafy Tree}\) 的 \(\text{BST}\) 实现：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textweight-balanced-leafy-tree_1" class="md-nav__link">
+    三、\(\text{Weight Balanced Leafy Tree}\)：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textweight-balanced-leafy-tree_2" class="md-nav__link">
+    四、\(\text{Weight Balanced Leafy Tree}\) 的区间操作：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textweight-balanced-leafy-tree_3" class="md-nav__link">
+    五、\(\text{Weight Balanced Leafy Tree}\) 实现可并堆：
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/LgxTpre/lgxtpre.github.com/edit/main/docs/数据结构/WBLT.md" title="编辑此页" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="textweight-balanced-leafy-tree"><span class="arithmatex">\(\text{Weight Balanced Leafy Tree}\)</span> 学习笔记：<a class="headerlink" href="#textweight-balanced-leafy-tree" title="Permanent link">&para;</a></h1>
+<h2 id="_1">前言：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>在这里十分十分感谢 <span class="arithmatex">\(\text{lxl}\)</span> 和王思齐发明和总结了 <span class="arithmatex">\(\text{WBLT}\)</span>。 </p>
+</li>
+<li>
+<p>因为网上关于 <span class="arithmatex">\(\text{WBLT}\)</span> 的正确讲解（已除去那篇国家集训队论文，不过伪代码和图片部分的小细节错误还是不少的）非常的少（包括 OI-Wiki 上的 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 和 <span class="arithmatex">\(\text{WBLT}\)</span> 的专题写的也全是假的。反正基本上只要用单旋的全是假的，不服的可以把代码给我，我教你卡），所以写下了本篇笔记来和大家一起交流。</p>
+</li>
+<li>
+<p>因为本人尚菜，并没有完全掌握 <span class="arithmatex">\(\text{WBLT}\)</span>（也就是说，并没有做完那几道经典的 <span class="arithmatex">\(\text{WBLT}\)</span> 题目），不过后面会慢慢更新。</p>
+</li>
+<li>
+<p>如若想要愉快的看完本篇笔记，建议学习线段树动态开点的思想（应该算 <span class="arithmatex">\(\text{trick}\)</span> 吧）。</p>
+</li>
+</ol>
+<h2 id="_2">前置知识：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="textleafy-tree">一、<span class="arithmatex">\(\text{Leafy Tree}\)</span>：<a class="headerlink" href="#textleafy-tree" title="Permanent link">&para;</a></h3>
+<p>其实 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 是一类树，它的核心思想是将原始数据放在叶节点中，而非叶子节点维护区间内的信息。</p>
+<p>听完核心思想，我想大家一定想到了一个我们喜闻乐见的数据结构——线段树。没错，线段树本质上也属于 <span class="arithmatex">\(\text{Leafy Tree}\)</span>，其特征非常明显，叶子结点维护的是原始信息，而非叶子节点你想要维护的区间信息。</p>
+<p>其实，我认为基于 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 的 <span class="arithmatex">\(\text{BST}\)</span> 实现，其实就是一种维护<strong>区间最大值</strong>的线段树，它赋予了线段树 <span class="arithmatex">\(\text{BST}\)</span> 的性质，加以去除部分的无用节点，形成一棵十分自由的线段树。</p>
+<p>如果各位对线段树十分熟悉（尤其是动态开点），下面内容将会给你一种十分熟悉的感觉。</p>
+<p>下面将说基于 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 的 <span class="arithmatex">\(\text{BST}\)</span> 实现。</p>
+<h3 id="textleafy-tree-textbst">二、基于 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 的 <span class="arithmatex">\(\text{BST}\)</span> 实现：<a class="headerlink" href="#textleafy-tree-textbst" title="Permanent link">&para;</a></h3>
+<p>首先，我们先梳理一下 <span class="arithmatex">\(\text{BST}\)</span> 和 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 的性质：</p>
+<p><span class="arithmatex">\(\text{BST}\)</span>：</p>
+<ol>
+<li>
+<p>对于任意一棵 <span class="arithmatex">\(\text{BST}\)</span> 来说，其根节点的左儿子一定不大于根节点，根节的右儿子一定不小于根节点。</p>
+</li>
+<li>
+<p>插入一个节点时，其若小于等于根节点，则向左走，其若大于根节点，则向右走。</p>
+</li>
+</ol>
+<p><span class="arithmatex">\(\text{Leafy Tree}\)</span>：</p>
+<ol>
+<li>
+<p>对于任意一棵 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 来说，其叶子结点一定是维护的原始数据，其非叶子节点一定是维护的区间信息。</p>
+</li>
+<li>
+<p>无论何时，<span class="arithmatex">\(\text{Leafy Tree}\)</span> 的一个节点要么有两个儿子，要么没有儿子。</p>
+</li>
+</ol>
+<p>此时，根据 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 的性质 <span class="arithmatex">\(1\)</span>，我们将所有的原始数据节点都放在叶子节点上，然后每两个节点上方加一个他们的父亲，维护的是这两个节点的最大值（注意，此时的两个节点不一定是两个原始数据节点）。</p>
+<p>根据 <span class="arithmatex">\(\text{BST}\)</span> 的性质 <span class="arithmatex">\(1\)</span> 我们可以推出结论 <span class="arithmatex">\(1\)</span>：</p>
+<blockquote>
+<p>左儿子一定小于等于右儿子。
+</p>
+</blockquote>
+<p>根据这一结论，我们规定 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 上的每一个左儿子要小于等于右儿子。</p>
+<p>然后一棵基于 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 的 <span class="arithmatex">\(\text{BST}\)</span> 雏形就出来了，我们再来梳理一下：</p>
+<ol>
+<li>
+<p>任何一个非叶子节点维护的都是其所代表的区间的最大值。</p>
+</li>
+<li>
+<p>任何一个左儿子都小于等于右儿子。</p>
+</li>
+<li>
+<p>真实的数据都处于叶子节点中。</p>
+</li>
+</ol>
+<p>根据上述内容，我们就可以实现查找了，思路如下：</p>
+<ul>
+<li>
+<p>如果当前要查找值小于等于当前节点的左儿子的值，则去左儿子中找，否则去右儿子找。</p>
+</li>
+<li>
+<p>如果当前节点是叶子节点，则判断是否相等，若不相等，则说明没有查找值，否则找到查找值。</p>
+</li>
+</ul>
+<p>Code：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="nf">Find</span><span class="p">(</span><span class="n">PNODE</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">isLeaf</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Find</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Find</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>现在，我们来思考插入：</p>
+<p>若我们有一个待插入的新节点 <span class="arithmatex">\(x\)</span>，则根据 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 的性质 <span class="arithmatex">\(1\)</span>，我们不难得出这个新节点一定是在叶子上的。综合一下，就不难得出插入的思路：</p>
+<ul>
+<li>
+<p>如果当前待插入新节点 <span class="arithmatex">\(x\)</span> 的值是小于等于当前节点左儿子的值，则进入当前节点左儿子，否则进入当前节点右儿子，然后更新当前节点（注意，一定要更新当前节点）。</p>
+</li>
+<li>
+<p>如果当前节点是一个叶子结点，则进行如下操作：</p>
+<ul>
+<li>
+<p>建立两个新节点，一个的值等于当前节点的值，另一个的值等于新节点的值。</p>
+</li>
+<li>
+<p>比较两个节点的大小，将值较大的节点设为当前节点的右儿子，较小的设为左儿子（依据性质 <span class="arithmatex">\(2\)</span>）。</p>
+</li>
+<li>
+<p>更新当前节点。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Code：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Insert</span><span class="p">(</span><span class="n">PNODE</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">isLeaf</span><span class="p">(</span><span class="n">T</span><span class="p">)){</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newNode</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newNode</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">&gt;</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">)</span>
+<span class="w">            </span><span class="n">swap</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pushup</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Insert</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">Insert</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pushup</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>那么至于删除操作，则更加的暴力：</p>
+<ul>
+<li>
+<p>若当前节点是叶子结点，则直接退出（因为此时我们的树为空）。</p>
+</li>
+<li>
+<p>若当前节点的左儿子的值小于等于待删除的节点的值，则进行下列操作：</p>
+<ul>
+<li>
+<p>若左儿子是叶子节点，则若左儿子的值与待删除节点相同，进行下述操作：</p>
+<ul>
+<li>
+<p>删除左儿子。</p>
+</li>
+<li>
+<p>将右儿子的值赋给当前节点。</p>
+</li>
+<li>
+<p>删除右儿子。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>否则，就走进左儿子。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>否则，对右儿子进行类似的操作。</p>
+</li>
+</ul>
+<p>Code：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Delete</span><span class="p">(</span><span class="n">PNODE</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">isLeaf</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">){</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">isLead</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">)){</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">value</span><span class="o">!=</span><span class="n">x</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">);</span>
+<span class="w">            </span><span class="n">PNODE</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
+<span class="w">            </span><span class="o">*</span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+<span class="w">            </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">Delete</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">isLeaf</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">)){</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">value</span><span class="o">!=</span><span class="n">x</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>
+<span class="w">            </span><span class="n">PNODE</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+<span class="w">            </span><span class="o">*</span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+<span class="w">            </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">Delete</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">pushup</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="textweight-balanced-leafy-tree_1">三、<span class="arithmatex">\(\text{Weight Balanced Leafy Tree}\)</span>：<a class="headerlink" href="#textweight-balanced-leafy-tree_1" title="Permanent link">&para;</a></h3>
+<p>首先，我们引入概念 <span class="arithmatex">\(\text{Weight Balanced Tree}\)</span>（权平衡树，又名 <span class="arithmatex">\(\text{BB}\;[\alpha]\)</span> 树），其主要思想就是依照正常的方法插入删除节点，然后如果左右子树比例不满足平衡系数 <span class="arithmatex">\(\alpha\)</span> 的话，则维护平衡。</p>
+<p>听到这一点，大家肯定想到了知名的替罪羊树。确实，替罪羊树属于 <span class="arithmatex">\(\text{Weight Balanced Tree}\)</span> 的一种，其维护方式暴力重构也是 <span class="arithmatex">\(\text{Weight Balanced Tree}\)</span> 的一个维护平衡的方式之一。</p>
+<p>然而 <span class="arithmatex">\(\text{Weight Balanced Tree}\)</span> 只能暴力重构维护平衡吗？显然不是，除了重构，我们还可以像 <span class="arithmatex">\(\text{AVL}\)</span> 树一样旋转来维护平衡，而 <span class="arithmatex">\(\text{Weight Balanced Leafy Tree}\)</span> 维护平衡的方式就是旋转。</p>
+<p><span class="arithmatex">\(\text{Weight Balanced Leafy Tree}\)</span> 的旋转分为单旋和双旋：</p>
+<p>单旋长这样：</p>
+<p><img alt="单旋" src="https://cdn.luogu.com.cn/upload/image_hosting/vc48cslk.png" /></p>
+<p>而双旋则是这样的：</p>
+<p><img alt="双旋" src="https://cdn.luogu.com.cn/upload/image_hosting/szk6evpo.png" /></p>
+<p><strong>注意：再次强调，一定要有双旋，不然平衡性是假的</strong></p>
+<p>然后源代码和不平衡的 <span class="arithmatex">\(\text{Leafy Tree}\)</span> 差不多，就是给每个节点加上属性 <span class="arithmatex">\(size\)</span>，然后每次插入删除操作维护一下树的平衡并且上传的时候别忘了 <span class="arithmatex">\(size\)</span> 的信息合并就可以了。</p>
+<p>Code：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="n">PNODE</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="kt">bool</span><span class="w"> </span><span class="n">d</span><span class="p">){</span>
+<span class="w">    </span><span class="n">PNODE</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">d</span><span class="p">){</span>
+<span class="w">        </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+<span class="w">        </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">pushup</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pushup</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pushup</span><span class="p">(</span><span class="n">T</span><span class="p">);</span><span class="c1">//注意，这里一定要先 pushup 儿子，再 pushup 父亲</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>既然已经介绍完了维护平衡的方式，那么我们应当在什么时候维护平衡呢？</p>
+<p>首先，我们设一个节点的平衡度为 <span class="arithmatex">\(\rho\)</span>，<span class="arithmatex">\(\rho\)</span> 的定义如下：</p>
+<div class="arithmatex">\[\rho_x=\dfrac{weight_{x.left}}{weight_x}\]</div>
+<p>其中的 <span class="arithmatex">\(weight_x\)</span> 表示子树 <span class="arithmatex">\(x\)</span> 所包含的叶节点数量。</p>
+<p>那么，我们认为一个节点是平衡的当且仅当 <span class="arithmatex">\(\rho\)</span> 满足 <span class="arithmatex">\(\rho \ge \alpha\)</span> 且 <span class="arithmatex">\(1-\rho \ge \alpha\)</span>，若当前节点不平衡，则若 <span class="arithmatex">\(\rho_{son} \ge \dfrac {1-2\alpha}{1-\alpha}\)</span>，则进行双旋，否则进行单旋。</p>
+<p>那么为什么可以依照这个原则来维护呢？我们来尝试证明一下：</p>
+<p>我们根据单旋的图示，设 <span class="arithmatex">\(\rho_x\)</span> 为节点 <span class="arithmatex">\(X\)</span> 的平衡度，<span class="arithmatex">\(\rho_y\)</span> 表示节点 <span class="arithmatex">\(Y\)</span> 的平衡度，<span class="arithmatex">\(\gamma_y\)</span> 为<strong>单旋后节点 <span class="arithmatex">\(\boldsymbol{Y}\)</span></strong> 的平衡度。</p>
+<p>根据图示和已知条件，我们可以得出：</p>
+<div class="arithmatex">\[0 &lt; \rho_x &lt; \alpha\]</div>
+<div class="arithmatex">\[\alpha \le \rho_y \le 1-\alpha\]</div>
+<p>根据图示和单旋的定义，我们不难看出 <span class="arithmatex">\(\rho_x\)</span>、<span class="arithmatex">\(\rho_y\)</span>、<span class="arithmatex">\(\gamma_y\)</span> 具有以下关系：</p>
+<div class="arithmatex">\[\gamma_y = \rho_x + \rho_y - \rho_x\rho_y\]</div>
+<p>我们已知 <span class="arithmatex">\(\rho_x\)</span> 和 <span class="arithmatex">\(\gamma_y\)</span> 就是当前子树旋转前和旋转后的平衡度，而我们旋转后子树想要达到平衡，则需要：</p>
+<div class="arithmatex">\[\alpha \le \gamma_y \le 1-\alpha\]</div>
+<p>我们此时可以将目标拆成两部分，分别是：</p>
+<div class="arithmatex">\[
+\begin{cases}
+\gamma_y \ge \alpha \\
+\gamma_y \le 1 - \alpha
+\end{cases}
+\]</div>
+<p>此时，将 <span class="arithmatex">\(\rho_x\)</span>、<span class="arithmatex">\(\rho_y\)</span>、<span class="arithmatex">\(\gamma_y\)</span> 的关系代入不等式组，易得：</p>
+<div class="arithmatex">\[
+\begin{cases}
+\rho_x + \rho_y - \rho_x\rho_y \ge \alpha \\
+\rho_x + \rho_y - \rho_x\rho_y \le 1 - \alpha
+\end{cases}
+\]</div>
+<p>将式子稍微变形，即得：</p>
+<div class="arithmatex">\[
+\begin{cases}
+\rho_y \ge \dfrac {\alpha - \rho_x}{1-\rho_x} \\\\
+\rho_y \le \dfrac {1 - \alpha- \rho_x}{1-\rho_x}
+\end{cases}
+\]</div>
+<p>此时，我们可以得出下列两个命题：</p>
+<div class="arithmatex">\[1.\;\forall \rho_y \in [\alpha, 1-\alpha]\;,\; \rho_x \in [0, \alpha ]\qquad \rho_y \ge \dfrac {\alpha - \rho_x}{1-\rho_x}\]</div>
+<div class="arithmatex">\[2.\;\forall \rho_y \in [\alpha, 1-\alpha]\;,\; \rho_x \in [0, \alpha ]\qquad \rho_y \le \dfrac {1- \alpha - \rho_x}{1-\rho_x}\]</div>
+<p>我们此时的问题也变成了证明上述两个命题在什么情况下同时成立。</p>
+<p>命题 <span class="arithmatex">\(1\)</span> 在已知条件下是显然成立的，因为原命题等于：</p>
+<div class="arithmatex">\[\forall \rho_y \in [\alpha, 1-\alpha]\;,\; \rho_x \in [0, \alpha ]\qquad \rho_y \ge (\dfrac {\alpha - \rho_x}{1-\rho_x})_{\max}\]</div>
+<p>根据糖水不等式，易得：</p>
+<div class="arithmatex">\[(\dfrac {\alpha - \rho_x}{1-\rho_x})_{\max} = \alpha\]</div>
+<p>故此时，命题 <span class="arithmatex">\(1\)</span> 显然成立。</p>
+<p>那么，关于命题 <span class="arithmatex">\(2\)</span>，我们也可以有相似的证明过程：</p>
+<div class="arithmatex">\[\forall \rho_y \in [\alpha, 1-\alpha]\;,\; \rho_x \in [0, \alpha ]\qquad \rho_y \le (\dfrac {1 - \alpha - \rho_x}{1-\rho_x})_{\min}\]</div>
+<p>根据糖水不等式，易得：</p>
+<div class="arithmatex">\[
+\begin{array}{ll}
+(\dfrac {1 - \alpha - \rho_x}{1  -\rho_x})_{\min} &amp;= \dfrac{1-\alpha-\alpha}{1-\alpha}\\\\
+&amp;=\dfrac{1-2\alpha}{1-\alpha}
+\end{array}
+\]</div>
+<p>代入原式，则得到：</p>
+<div class="arithmatex">\[\forall \rho_y \in [\alpha, 1-\alpha]\qquad \rho_y \le \dfrac{1-2\alpha}{1-\alpha}\]</div>
+<p>此时我们可以看出，当 <span class="arithmatex">\(\rho_y \in (\dfrac{1-2\alpha}{1-\alpha},1-\alpha]\)</span> 的时候，命题二不成立，故我们需要对 <span class="arithmatex">\(\rho_y\)</span> 的范围进行收缩到 <span class="arithmatex">\(\rho_y \in [\alpha, \dfrac{1-2\alpha}{1-\alpha}]\)</span> 上述两个命题才同时成立。</p>
+<p>综上，若单旋能维持平衡性，则需要 <span class="arithmatex">\(\rho_y \le \dfrac{1-2\alpha}{1-\alpha}\)</span>，否则则必须进行双旋。</p>
+<p>证毕。</p>
+<p>所以此时的维护应当这么写：</p>
+<ul>
+<li>
+<p>若当前节点<strong>左儿子的大小</strong>与<strong>当前节点的大小</strong>的比值小于 <span class="arithmatex">\(\alpha\)</span>，则：</p>
+<ul>
+<li>
+<p>若当前<strong>右儿子的左儿子的大小</strong>与<strong>当前右儿子的大小</strong>的比值大于等于 <span class="arithmatex">\(\dfrac{1-2\alpha}{1-\alpha}\)</span>，则进行双旋。</p>
+</li>
+<li>
+<p>否则进行单旋。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>否则若当前节点<strong>右儿子的大小</strong>与<strong>当前节点的大小</strong>的比值小于 <span class="arithmatex">\(\alpha\)</span>，则：</p>
+<ul>
+<li>
+<p>若当前<strong>左儿子的右儿子的大小</strong>与<strong>当前左儿子的大小</strong>的比值大于等于 <span class="arithmatex">\(\dfrac{1-2\alpha}{1-\alpha}\)</span>，则进行双旋。</p>
+</li>
+<li>
+<p>否则进行单旋。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Code：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">maintain</span><span class="p">(</span><span class="n">PNODE</span><span class="w"> </span><span class="n">T</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isLeaf</span><span class="p">(</span><span class="n">T</span><span class="p">)){</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span>
+<span class="w">            </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span>
+<span class="w">            </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">){</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">1-2</span><span class="o">*</span><span class="n">alpha</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span>
+<span class="w">                </span><span class="n">rotate</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="o">!</span><span class="n">d</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">1-2</span><span class="o">*</span><span class="n">alpha</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span>
+<span class="w">                </span><span class="n">rotate</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="o">!</span><span class="n">d</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rotate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">d</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pushup</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>关于平衡因子 <span class="arithmatex">\(\alpha\)</span> 的取值问题，实际上只要取在区间 <span class="arithmatex">\([0,\dfrac{3-\sqrt{5}}{2}]\)</span> 之间的话都可以，证明太显然了，在这里受篇幅限制就不展开了，证明思路就考虑区间的定义即可，具体参见高一集合部分。个人实践得出 <span class="arithmatex">\(\alpha\)</span> 最佳取值是 <span class="arithmatex">\(0.2928\)</span>，不过具体而言则是因题而异。</p>
+<p>附普通平衡树板子：</p>
+<p><a href="https://www.luogu.com.cn/paste/qauf89fj"><span class="arithmatex">\(\text{Code}\)</span></a></p>
+<h3 id="textweight-balanced-leafy-tree_2">四、<span class="arithmatex">\(\text{Weight Balanced Leafy Tree}\)</span> 的区间操作：<a class="headerlink" href="#textweight-balanced-leafy-tree_2" title="Permanent link">&para;</a></h3>
+<p>既然 <span class="arithmatex">\(\text{WBLT}\)</span> 和线段树这么像，那么我们是不是可以按照线段树的方法对其进行区间操作呢？答案是可以的，但是仅针对于线段树所能维护的操作这样打标记。</p>
+<p>例如，我们利用 <span class="arithmatex">\(\text{WBLT}\)</span> 过掉线段树板板题的时候就可以这么干，不过碍于篇幅限制，我就只好将代码扔到<a href="https://www.luogu.com.cn/paste/5eeksbhk">云剪贴板</a>里了，有兴趣的可以去看看。</p>
+<p>不过，如果遇到线段树维护不了的操作，我们的 <span class="arithmatex">\(\text{WBLT}\)</span> 就束手无策……了吗？</p>
+<p>其实并没有，因为 <span class="arithmatex">\(\text{WBLT}\)</span> 可以分裂和合并的特性（实际上这个特性是从线段树继承过来的），加之平衡树的高度自由性，我们不难想到可以用类似 <span class="arithmatex">\(\text{FHQ Treap}\)</span> 的方法来进行维护一些线段树特性所不支持的操作（因为他毕竟不能像 <span class="arithmatex">\(\text{Splay}\)</span> 那样把区间旋上去）。</p>
+<p>不过，<span class="arithmatex">\(\text{WBLT}\)</span> 的 <span class="arithmatex">\(\operatorname{Split}\)</span> 和 <span class="arithmatex">\(\operatorname{Merge}\)</span> 操作并不像 <span class="arithmatex">\(\text{FHQ Treap}\)</span> 那么好写（并且常数还大了），因为 <span class="arithmatex">\(\operatorname{Merge}\)</span> 和 <span class="arithmatex">\(\operatorname{Split}\)</span> 操作有可能会让原先的 <span class="arithmatex">\(\text{WBLT}\)</span> 失去其自身的性质，这可能也是 <span class="arithmatex">\(\text{WBLT}\)</span> 为数不多的痛点吧（不过也有可能自己写丑了）。</p>
+<p>现在，我们考虑合并操作，对于给定的两棵树 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span>：</p>
+<ul>
+<li>
+<p>若 <span class="arithmatex">\(size_B \ge size_A \cdot \alpha\)</span> 则直接将 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 合并，即将 <span class="arithmatex">\(A\)</span> 设为右儿子，<span class="arithmatex">\(B\)</span> 设为左儿子。</p>
+</li>
+<li>
+<p>否则，进行下述操作：</p>
+<ul>
+<li>
+<p>若 <span class="arithmatex">\(size_A \ge size_B\)</span>：</p>
+<ul>
+<li>
+<p>若将 <span class="arithmatex">\(B\)</span> 直接合并到 <span class="arithmatex">\(A\)</span> 的右儿子能保持平衡，那就合并，然后其结果再与 <span class="arithmatex">\(A\)</span> 的左儿子合并。</p>
+</li>
+<li>
+<p>否则，将 <span class="arithmatex">\(A\)</span> 的左儿子的右儿子与 <span class="arithmatex">\(A\)</span> 的右儿子进行合并，将 <span class="arithmatex">\(A\)</span> 的左儿子的左儿子与 <span class="arithmatex">\(B\)</span> 进行合并，再将两者的合并结果进行合并。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>否则：</p>
+<ul>
+<li>
+<p>若将 <span class="arithmatex">\(A\)</span> 直接合并到 <span class="arithmatex">\(B\)</span> 的左儿子能保持平衡，那就合并，然后其结果再与 <span class="arithmatex">\(B\)</span> 的右儿子合并。</p>
+</li>
+<li>
+<p>否则，将 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 的左儿子的左儿子合并，将 <span class="arithmatex">\(B\)</span> 的左儿子的右儿子与 <span class="arithmatex">\(B\)</span> 的右儿子进行合并，再将两者的结果进行合并。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>实际上，<span class="arithmatex">\(\operatorname{Merge}\)</span> 的函数其实本质上就是：若两者直接合并平衡，则直接合并，否则单旋后合并，否则双旋后合并。</p>
+<p>Code：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">inline</span><span class="w"> </span><span class="n">PNODE</span><span class="w"> </span><span class="nf">Merge</span><span class="p">(</span><span class="n">PNODE</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">PNODE</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="c1">//打大写太麻烦了，只好用小写了/kel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="k">nullptr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="k">nullptr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span><span class="c1">//能直接合并则直接合并</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">mix</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">PNODE</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">){</span>
+<span class="w">        </span><span class="n">pushdown</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="p">){</span>
+<span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="n">b</span><span class="p">));</span>
+<span class="w">            </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="c1">//此时原节点 a 变成了垃圾节点，要回收空间</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">pushdown</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">Merge</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">),</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">));</span>
+<span class="w">        </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="c1">//此时原节点 a 变成了垃圾节点，要回收空间</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="n">pushdown</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="p">){</span>
+<span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">Merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>
+<span class="w">            </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="c1">//此时原节点 b 变成了垃圾节点，要回收空间</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">pushdown</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">Merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">),</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">));</span>
+<span class="w">        </span><span class="n">deleteNode</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="c1">//此时原节点 b 变成了垃圾节点，要回收空间</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p><strong>注意：<span class="arithmatex">\(\boldsymbol{\operatorname{Merge}}\)</span> 操作不满足交换律。</strong></p>
+<p>有了 <span class="arithmatex">\(\operatorname{Merge}\)</span> 了以后，<span class="arithmatex">\(\operatorname{Split}\)</span> 就好写多了（实际上也没好写到哪里去）。</p>
+<p><span class="arithmatex">\(\text{WBLT}\)</span> 的 <span class="arithmatex">\(\operatorname{Split}\)</span> 实际上也可以分为两种，分别是“按秩分裂”和“按值分裂”。</p>
+<p>我们先谈谈按秩分裂。</p>
+<p>我们思考一下，若当前还要分裂的大小为 <span class="arithmatex">\(0\)</span> 了，那么我们还需要分裂吗？显然不需要了。故此时我们就可以将分裂出来的树 <span class="arithmatex">\(X\)</span> 置为空。</p>
+<p>那么如果当前要分裂的树是一个叶子节点，那么我们显然也不需要分类了，直接将树 <span class="arithmatex">\(X\)</span> 置为当前树 <span class="arithmatex">\(T\)</span> 就行了。</p>
+<p>否则的话，我们首先将标记下传，然后如果当前待分裂的大小小于等于我们左子树的大小，则先将左子树分裂成两部分，一部分是我们需要的，另一部分是分剩下的。</p>
+<p>此时 <code>Merge</code> 就派上用场了，将剩下的和树 <span class="arithmatex">\(T\)</span> 的左子树进行合并，就是我们需要的另一部分树 <span class="arithmatex">\(Y\)</span>。</p>
+<p>对于右子树，我们进行类似的操作，只不过在分裂右子树时所用的大小应当是原大小减去左子树大小。</p>
+<p>Code:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 先行注意，传参之前请先将子树 X 和 Y 置为 nullptr。</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Split</span><span class="p">(</span><span class="n">PNODE</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">PNODE</span><span class="w"> </span><span class="o">&amp;</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">PNODE</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Y</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">){</span>
+<span class="w">        </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">isLeaf</span><span class="p">(</span><span class="n">T</span><span class="p">)){</span>
+<span class="w">        </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">pushdown</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">){</span>
+<span class="w">        </span><span class="n">PNODE</span><span class="w"> </span><span class="n">bufY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Split</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">bufY</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">bufY</span><span class="p">,</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">PNODE</span><span class="w"> </span><span class="n">bufX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Split</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">bufX</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">);</span>
+<span class="w">        </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">T</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">,</span><span class="w"> </span><span class="n">bufX</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>至于按值分裂，实际上和按秩分裂是一模一样的，只不过按值分裂不需要判断 <span class="arithmatex">\(x\)</span> 是否为 <span class="arithmatex">\(0\)</span>，且分裂右子树的时候不需要将 <span class="arithmatex">\(x\)</span> 减去左子树的大小，剩下就基本上一模一样了。碍于篇幅限制，我们就不进行进一步的代码演示了。</p>
+<p><strong>注意：若 <span class="arithmatex">\(\operatorname{Merge}\)</span> 和 <span class="arithmatex">\(\operatorname{Split}\)</span> 执行次数过多，则会产生无法接受的垃圾节点数量，故我们在写 <span class="arithmatex">\(\operatorname{Merge}\)</span> 和 <span class="arithmatex">\(\operatorname{Split}\)</span> 的时候，请务必做好垃圾回收！！</strong></p>
+<p>附文艺平衡树代码：</p>
+<p><a href="https://www.luogu.com.cn/paste/z4o1hnra"><span class="arithmatex">\(\text{Code}\)</span></a></p>
+<h3 id="textweight-balanced-leafy-tree_3">五、<span class="arithmatex">\(\text{Weight Balanced Leafy Tree}\)</span> 实现可并堆：<a class="headerlink" href="#textweight-balanced-leafy-tree_3" title="Permanent link">&para;</a></h3>
+<p>在讲 <span class="arithmatex">\(\text{WBLT}\)</span> 的可持久化之前，我们先讲点整活的部分。</p>
+<p>目前好像是没有找到哪一篇文章写 <span class="arithmatex">\(\text{WBLT}\)</span> 怎么实现可并堆，不过可能是因为其思路过于简单或者是左偏树实在是太好写了。</p>
+<p>按照惯例，我们先来回顾一下堆的性质：</p>
+<ol>
+<li>
+<p>根节点大于等于或小于等于其所有的儿子节点</p>
+</li>
+<li>
+<p>堆是一棵完全二叉树。</p>
+</li>
+</ol>
+<p>然后，我们把目光放到所有 <span class="arithmatex">\(\text{WBLT}\)</span> 节点上，尤其是非叶子节点上，就可以看到一些平时在平衡树上所看不到的东西：</p>
+<blockquote>
+<p>父节点维护的是其表示的区间的最大值。
+</p>
+</blockquote>
+<p>诶，等等，这不就意味着父节点是它所代表的区间内的值最大的节点吗？确实，所以我们此时不难看出，<span class="arithmatex">\(\text{WBLT}\)</span> 的本身也是满足堆的性质 <span class="arithmatex">\(1\)</span> 的。</p>
+<p>至于性质 <span class="arithmatex">\(2\)</span>，兄弟，这是平衡树啊！！所以 <span class="arithmatex">\(\text{WBLT}\)</span> 是可以当堆使的。</p>
+<p>又因为 <span class="arithmatex">\(\text{WBLT}\)</span> 支持合并，所以自然而然的就可以做可并堆来使了。</p>
+<p>碍于篇幅限制，我将过掉可并堆模板题的代码放到<a href="https://www.luogu.com.cn/paste/n9g9ksah">云剪贴板</a>里面了，有兴趣的大家可以去康一康，顺便看看有没有什么数据能把它卡掉，这里就不多赘述了。</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="上一页: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 LgxTpre
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/lgxtpre" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:<1475259438@qq.com>" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "navigation.expand", "search.share"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+        <script src="../../site_config/static/js/math-csr.js?math-csr"></script>
+      
+        <script src="../../site_config/assets/vendor/mathjax/es5/tex-mml-chtml.js?math-csr"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+    
+  </body>
+</html>
